@@ -36,6 +36,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.composelistapp.ui.theme.ComposeListAppTheme
+import org.w3c.dom.NameList
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -77,19 +78,24 @@ class MainActivity : ComponentActivity() {
                             Text(text = "Add")
                         }
                     }
-                    LazyColumn {
-                        items(names.reversed()) { currentName ->
-                            Text(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp),
-                                text = currentName,
-                            )
-                            Divider()
-                        }
-                    }
+                    NameList(names = names)
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun NameList(names: List<String>, modifier: Modifier = Modifier) {
+    LazyColumn {
+        items(names.reversed()) { currentName ->
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                text = currentName,
+            )
+            Divider()
         }
     }
 }
